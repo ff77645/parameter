@@ -246,7 +246,12 @@ var CONVERT_MAP = Parameter.CONVERT_MAP = {
 function formatRule(rule) {
   rule = rule || {};
   if (typeof rule === 'string') {
-    rule = { type: rule };
+    const r_sp = rule.split(':')
+    if(r_sp.length > 1){
+      rule = { type: r_sp[0], rule:r_sp.slice(1) };
+    }else{
+      rule = { type: rule };
+    }
   } else if (Array.isArray(rule)) {
     rule = { type: 'enum', values: rule };
   } else if (rule instanceof RegExp) {
